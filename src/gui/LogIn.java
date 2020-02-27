@@ -13,6 +13,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import logic.User;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DropMode;
@@ -64,6 +67,7 @@ public class LogIn {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		User p1 = new User();
 		frame = new JFrame();
 		frame.setBackground(new Color(0, 51, 153));
 		frame.getContentPane().setEnabled(false);
@@ -101,10 +105,23 @@ public class LogIn {
 		btnConfirm.setBounds(84, 157, 183, 31);
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String username = txtpnUsername.getText();
+				String username = txtpnUsername.getText().trim();
 				char[] password = pwdPassword.getPassword();
+				String pass = "";
+				for(int i = 0; i<password.length;i++) {
+					pass = pass + password[i];
+				}
 				int index = list.getSelectedIndex();
-				System.out.println(username + password[0] + index);
+				String attempt = p1.Authenticate(index, username, pass); 
+				if(attempt.equals("true")) {
+					//no issues move on to the next screen
+				}else if(attempt.equals("false")) {
+					//Log info is incorect try again
+				}else if(attempt.equals("DNE")) {
+					//account does not exist make one 
+				}
+				
+				System.out.println(username + pass + index);
 				System.exit(-1);
 			}
 		});
