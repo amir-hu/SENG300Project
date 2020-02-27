@@ -4,8 +4,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import logic.Patient;
+
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class NewUser {
 
@@ -19,7 +24,7 @@ public class NewUser {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void open() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -73,6 +78,20 @@ public class NewUser {
 		txtEnterUsername.setColumns(10);
 		
 		JButton btnHitToCreate = new JButton("Hit to Create Account");
+		btnHitToCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				char[] pass = passwordField.getPassword();
+				String password = "";
+				for(int i = 0;i < pass.length;i++ ) {
+					password = password + pass[i];
+				}
+				Patient pat = new Patient(txtEnterFirstName.getText(),txtEnterLastName.getText(),
+						txtEnterUsername.getText(),txtEnterEmailAddress.getText(),password);
+				pat.create();
+				System.exit(-1);
+				
+			}
+		});
 		btnHitToCreate.setBounds(116, 215, 166, 25);
 		frame.getContentPane().add(btnHitToCreate);
 		

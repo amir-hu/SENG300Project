@@ -29,13 +29,13 @@ import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JTextArea;
 
 public class LogIn {
 
 	private JFrame frame;
 	private JPasswordField pwdPassword;
 	private JComboBox list;
-	private JLabel label;
 	private JLabel label_2;
 	private JLabel label_5;
 	private JLabel label_8;
@@ -76,13 +76,9 @@ public class LogIn {
 		frame.getContentPane().setFont(new Font("Arial", Font.PLAIN, 13));
 		frame.getContentPane().setBackground(new Color(0, 0, 153));
 		
-		label = new JLabel("PLZ LOGGIN");
-		label.setBounds(0, 2, 432, -14);
-		
 		label_2 = new JLabel("");
 		label_2.setBounds(0, 219, 432, 31);
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(label);
 		
 		JTextPane txtpnUsername = new JTextPane();
 		txtpnUsername.setBounds(84, 64, 183, 31);
@@ -111,18 +107,19 @@ public class LogIn {
 				for(int i = 0; i<password.length;i++) {
 					pass = pass + password[i];
 				}
+				
 				int index = list.getSelectedIndex();
 				String attempt = p1.Authenticate(index, username, pass); 
 				if(attempt.equals("true")) {
 					//no issues move on to the next screen
 				}else if(attempt.equals("false")) {
-					//Log info is incorect try again
+					JOptionPane.showMessageDialog(frame, "Log in information incorrect try again","Stupid retard", JOptionPane.ERROR_MESSAGE);
 				}else if(attempt.equals("DNE")) {
-					//account does not exist make one 
+					JOptionPane.showMessageDialog(frame, "Account does not exist ");
 				}
 				
 				System.out.println(username + pass + index);
-				System.exit(-1);
+//				System.exit(-1);
 			}
 		});
 		
@@ -138,6 +135,16 @@ public class LogIn {
 		label_8.setBounds(0, 188, 432, 31);
 		frame.getContentPane().add(label_8);
 		frame.getContentPane().add(label_2);
+		
+		JButton btnNewPatient = new JButton("New Patient");
+		btnNewPatient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NewUser start = new NewUser();
+				start.open();
+			}
+		});
+		btnNewPatient.setBounds(84, 26, 183, 25);
+		frame.getContentPane().add(btnNewPatient);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
