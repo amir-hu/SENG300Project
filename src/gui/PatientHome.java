@@ -52,7 +52,7 @@ public class PatientHome {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		//reads the file
-		String filename= getUserName()+".txt";
+		String filename= "src/patientRecords/"+getUserName()+".txt";
 		String name=getUserName();
 		try {
 			File patient = new File(filename);
