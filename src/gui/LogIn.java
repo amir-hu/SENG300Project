@@ -112,6 +112,7 @@ public class LogIn {
 				String attempt = p1.Authenticate(index, username, pass); 
 				if(attempt.equals("true")) {
 					//no issues move on to the next screen
+					PatientHome.open(username);
 				}else if(attempt.equals("false")) {
 					JOptionPane.showMessageDialog(frame, "Log in information incorrect try again","Stupid retard", JOptionPane.ERROR_MESSAGE);
 				}else if(attempt.equals("DNE")) {
