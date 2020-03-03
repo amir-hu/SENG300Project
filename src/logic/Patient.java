@@ -24,9 +24,16 @@ public class Patient extends User {
 		this.password = password;
 	}
 
+	public Patient() {
+		// TODO Auto-generated constructor stub
+	}
+	public String Authenticate(String username,String password) {
+		return super.Authenticate("src/patientRecords/" + username + ".txt", password);
+	}
+
 	public void create() {
 		try {
-			Writer wr = new FileWriter("src/Records/"+username + ".txt");
+			Writer wr = new FileWriter("src/patientRecords/"+username + ".txt");
 			wr.write(firstName + " " + lastName + "\n" + username + "\n" + password + "\n" + email);
 			wr.flush();wr.close();
 		} catch (IOException e) {

@@ -14,6 +14,9 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import logic.Admin;
+import logic.Doctor;
+import logic.Patient;
 import logic.User;
 
 import java.awt.event.ActionListener;
@@ -67,7 +70,7 @@ public class LogIn {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		User p1 = new User();
+//		User p1 = new User();
 		frame = new JFrame();
 		frame.setBackground(new Color(0, 51, 153));
 		frame.getContentPane().setEnabled(false);
@@ -107,9 +110,20 @@ public class LogIn {
 				for(int i = 0; i<password.length;i++) {
 					pass = pass + password[i];
 				}
-				
+				String attempt = "";
 				int index = list.getSelectedIndex();
-				String attempt = p1.Authenticate(index, username, pass); 
+				if(index==0) {
+					Doctor doc = new Doctor();
+					attempt = doc.Authenticate(username, pass);
+				}else if(index==1) {
+					Patient pat = new Patient();
+					attempt = pat.Authenticate(username, pass);
+					
+				}else if(index==2) {
+					Admin ad = new Admin();
+					attempt = ad.Authenticate(username, pass);
+				}
+
 				if(attempt.equals("true")) {
 					//no issues move on to the next screen
 					PatientHome.open(username);
