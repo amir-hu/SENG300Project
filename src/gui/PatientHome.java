@@ -3,13 +3,13 @@ package gui;
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
-
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 public class PatientHome {
 	private String userName;
 	private JFrame frame;
+	private ArrayList<String> appointmentList;
 
 	/**
 	 * Launch the application.
@@ -54,12 +55,24 @@ public class PatientHome {
 		//reads the file
 		String filename= "src/patientRecords/"+getUserName()+".txt";
 		String name=getUserName();
+		String appointment;
+		appointmentList=new ArrayList<String>();
 		try {
 			File patient = new File(filename);
 		    Scanner myReader = new Scanner(patient);
 		    if (myReader.hasNextLine()) {
 		    	name = myReader.nextLine();
 		    }
+		    for (int i=0; i<3;i++) {
+		    	if (myReader.hasNextLine()) {
+			    	appointment = myReader.nextLine();
+			    }
+		    }
+		    while (myReader.hasNextLine()) {
+		    	appointment = myReader.nextLine();
+		    	appointmentList.add(appointment);
+		    }
+		    System.out.print(appointmentList);
 		    myReader.close();
 		    } catch (FileNotFoundException e) {
 		    	System.out.println("An error occurred.");
@@ -70,9 +83,10 @@ public class PatientHome {
 		UserName.setBounds(10, 11, 414, 14);
 		frame.getContentPane().add(UserName);
 		
-		JList list = new JList();
-		list.setBounds(24, 178, 386, -130);
-		frame.getContentPane().add(list);
+		DefaultListModel app=new DefaultListModel();
+		for (int i=0; i<appointmentList.size();i++) {
+			app.addElement(appointmentList.get(i));
+		}
 		
 		JButton ManageAppointmentBtn = new JButton("Manage Appointment(s)");
 		ManageAppointmentBtn.addActionListener(new ActionListener() {
@@ -80,13 +94,25 @@ public class PatientHome {
 				//update appointment
 			}
 		});
+		JList list = new JList();
+		list.setModel(app);
+		list.setBounds(10, 36, 414, 157);
+		frame.getContentPane().add(list);
 		ManageAppointmentBtn.setBounds(10, 230, 140, 25);
 		frame.getContentPane().add(ManageAppointmentBtn);
 		
 		JButton DeleteAppointmentBtn = new JButton("Delete Appointment");
+
 		DeleteAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//List of appointments
+				int delIndex=list.getSelectedIndex();
+				//remove the record from file
+				if (delIndex>=0 && delIndex<appointmentList.size()) {
+					appointmentList.remove(delIndex);
+					app.removeElementAt(delIndex);
+					list.setModel(app);
+					//List of appointments
+				}
 			}
 		});
 		DeleteAppointmentBtn.setBounds(284, 230, 140, 25);
@@ -109,4 +135,5 @@ public class PatientHome {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
 }
