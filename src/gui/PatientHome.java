@@ -3,6 +3,7 @@ package gui;
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
@@ -105,9 +106,22 @@ public class PatientHome {
 
 		DeleteAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String filename= "src/patientRecords/"+getUserName()+".txt";
 				int delIndex=list.getSelectedIndex();
+				String delRecord=appointmentList.get(delIndex);
 				//remove the record from file
 				if (delIndex>=0 && delIndex<appointmentList.size()) {
+					try {
+						String contents= fileToString(filename);
+						contents = contents.replaceAll(delRecord+"\n", "");
+						PrintWriter writer = new PrintWriter(new File(filename));
+					    writer.append(contents);
+					    writer.flush();
+					    writer.close();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					appointmentList.remove(delIndex);
 					app.removeElementAt(delIndex);
 					list.setModel(app);
@@ -126,6 +140,16 @@ public class PatientHome {
 		});
 		AddAppointmentBtn.setBounds(146, 204, 140, 25);
 		frame.getContentPane().add(AddAppointmentBtn);
+	}
+	public static String fileToString(String filePath) throws Exception{
+	      String input = null;
+	      Scanner sc = new Scanner(new File(filePath));
+	      StringBuffer sb = new StringBuffer();
+	      while (sc.hasNextLine()) {
+	         input = sc.nextLine();
+	         sb.append(input+"\n");
+	      }
+	      return sb.toString();
 	}
 
 	public String getUserName() {
