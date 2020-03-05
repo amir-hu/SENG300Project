@@ -43,6 +43,7 @@ public class LogIn {
 	private JLabel label_2;
 	private JLabel label_5;
 	private JLabel label_8;
+	private User[] arr= {new Doctor(),new Patient(),new Admin(),new Nurse()};
 
 	/**
 	 * Launch the application.
@@ -113,21 +114,8 @@ public class LogIn {
 				}
 				String attempt = "";
 				int index = list.getSelectedIndex();
-				if(index==0) {
-					Doctor doc = new Doctor();
-					attempt = doc.Authenticate(username, pass);
-				}else if(index==1) {
-					Patient pat = new Patient();
-					attempt = pat.Authenticate(username, pass);
-					
-				}else if(index==2) {
-					Admin ad = new Admin();
-					attempt = ad.Authenticate(username, pass);
-				}else if(index==3) {
-					Nurse nur = new Nurse();
-					attempt = nur.Authenticate(username, pass);
-				}
-
+				User use = arr[index];
+				attempt = use.Authenticate(username, pass);
 				if(attempt.equals("true")) {
 					//no issues move on to the next screen
 					if(index==1) {
