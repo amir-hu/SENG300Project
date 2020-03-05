@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 
 import logic.Admin;
 import logic.Doctor;
+import logic.Nurse;
 import logic.Patient;
 import logic.User;
 
@@ -122,13 +123,18 @@ public class LogIn {
 				}else if(index==2) {
 					Admin ad = new Admin();
 					attempt = ad.Authenticate(username, pass);
+				}else if(index==3) {
+					Nurse nur = new Nurse();
+					attempt = nur.Authenticate(username, pass);
 				}
 
 				if(attempt.equals("true")) {
 					//no issues move on to the next screen
+					if(index==1) {
 					PatientHome.open(username);
+					}
 				}else if(attempt.equals("false")) {
-					JOptionPane.showMessageDialog(frame, "Log in information incorrect try again","Stupid retard", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Log in information incorrect try again","ERROR", JOptionPane.ERROR_MESSAGE);
 				}else if(attempt.equals("DNE")) {
 					JOptionPane.showMessageDialog(frame, "Account does not exist ");
 				}
@@ -140,7 +146,7 @@ public class LogIn {
 		
 		list = new JComboBox();
 		list.setBounds(84, 126, 183, 31);
-		list.setModel(new DefaultComboBoxModel(new String[] {"Doctor", "Patient", "Admin"}));
+		list.setModel(new DefaultComboBoxModel(new String[] {"Doctor", "Patient", "Admin","Nurse"}));
 		
 				list.setSelectedIndex(1);
 				frame.getContentPane().add(list);

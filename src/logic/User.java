@@ -12,14 +12,13 @@ public class User {
 		try {
 			Scanner scan = new Scanner(file);
 //			System.out.println(scan.nextLine());
-//			System.out.println(scan.nextLine());
 			scan.nextLine();
 			scan.nextLine();
-			if(scan.nextLine().equals(password)) {
+			
+			if(scan.nextLine().trim().equals(password)) {
 				return "true";
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("DASFAS");
 			return "DNE";
 		}
 		
