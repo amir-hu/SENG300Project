@@ -135,6 +135,8 @@ public class LogIn {
 					//no issues move on to the next screen
 					if(index==1) {
 					PatientHome.open(username);
+					}if(index==0) {
+						DoctorHome.run();
 					}
 				}else if(attempt.equals("false")) {
 					JOptionPane.showMessageDialog(frame, "Log in information incorrect try again","ERROR", JOptionPane.ERROR_MESSAGE);

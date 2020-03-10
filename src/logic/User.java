@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class User {
+	protected String name;
+	protected String username;
 
 	//checks to see if the user exists or if the information is correct
 	public String Authenticate(String username,String password) {
@@ -12,8 +14,9 @@ public class User {
 		try {
 			Scanner scan = new Scanner(file);
 //			System.out.println(scan.nextLine());
-			scan.nextLine();
-			scan.nextLine();
+			this.name = scan.nextLine();
+			
+			this.username = scan.nextLine();
 			
 			if(scan.nextLine().trim().equals(password)) {
 				return "true";
