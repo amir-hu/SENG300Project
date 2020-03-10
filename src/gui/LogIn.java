@@ -34,6 +34,8 @@ import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextArea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LogIn {
 
@@ -86,11 +88,24 @@ public class LogIn {
 		frame.getContentPane().setLayout(null);
 		
 		JTextPane txtpnUsername = new JTextPane();
+		txtpnUsername.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				txtpnUsername.setText("");
+			}
+		});
 		txtpnUsername.setBounds(84, 64, 183, 31);
 		txtpnUsername.setText("Username");
+		
 		frame.getContentPane().add(txtpnUsername);
 		
 		pwdPassword = new JPasswordField();
+		pwdPassword.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pwdPassword.setText("");
+			}
+		});
 		pwdPassword.setBounds(84, 95, 183, 31);
 		pwdPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		pwdPassword.setBackground(Color.WHITE);
