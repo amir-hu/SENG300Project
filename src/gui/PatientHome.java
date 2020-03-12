@@ -14,11 +14,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class PatientHome {
 	private String userName;
 	private JFrame frame;
-	private ArrayList<String> appointmentList;
+	private ArrayList<String[]> appointmentList;
 
 	/**
 	 * Launch the application.
@@ -57,7 +58,7 @@ public class PatientHome {
 		String filename= "src/patientRecords/"+getUserName()+".txt";
 		String name=getUserName();
 		String appointment;
-		appointmentList=new ArrayList<String>();
+		appointmentList=new ArrayList<String[]>();
 		try {
 			File patient = new File(filename);
 		    Scanner myReader = new Scanner(patient);
@@ -71,7 +72,9 @@ public class PatientHome {
 		    }
 		    while (myReader.hasNextLine()) {
 		    	appointment = myReader.nextLine();
-		    	appointmentList.add(appointment);
+		    	
+		    	String[] apointmentDetails= processAppointmentDetails(appointment);
+		    	appointmentList.add(apointmentDetails);
 		    }
 		    System.out.print(appointmentList);
 		    myReader.close();
@@ -85,8 +88,12 @@ public class PatientHome {
 		frame.getContentPane().add(UserName);
 		
 		DefaultListModel app=new DefaultListModel();
+		String appoint;
 		for (int i=0; i<appointmentList.size();i++) {
-			app.addElement(appointmentList.get(i));
+			
+			appoint=appointmentIntoString(appointmentList,i);
+			
+			app.addElement(appoint); ////////change
 		}
 		
 		JButton ManageAppointmentBtn = new JButton("Manage Appointment(s)");
@@ -96,6 +103,7 @@ public class PatientHome {
 			}
 		});
 		JList list = new JList();
+		list.setFont(new Font("Courier New", Font.PLAIN, 13));
 		list.setModel(app);
 		list.setBounds(10, 36, 414, 157);
 		frame.getContentPane().add(list);
@@ -108,7 +116,7 @@ public class PatientHome {
 			public void actionPerformed(ActionEvent e) {
 				String filename= "src/patientRecords/"+getUserName()+".txt";
 				int delIndex=list.getSelectedIndex();
-				String delRecord=appointmentList.get(delIndex);
+				String delRecord=DelAppointmentIntoString(appointmentList,delIndex);
 				//remove the record from file
 				if (delIndex>=0 && delIndex<appointmentList.size()) {
 					try {
@@ -141,6 +149,30 @@ public class PatientHome {
 		AddAppointmentBtn.setBounds(146, 204, 140, 25);
 		frame.getContentPane().add(AddAppointmentBtn);
 	}
+	protected String DelAppointmentIntoString(ArrayList<String[]> appointmentList2, int delIndex) {
+		String[] array=appointmentList.get(delIndex);
+		String toBeDeleted= array[0]+"%"+array[1]+"%"+array[2];
+		return toBeDeleted;
+	}
+
+	private String appointmentIntoString(ArrayList<String[]> appointmentList, int i) {
+		String[] array=appointmentList.get(i);
+		String name=array[0];
+		while (name.length()!=15) {
+			name=name+" ";
+		}
+		String output=String.format("%s%15s%20s", name ,array[1],array[2]);
+		return output;
+	}
+
+	private String[] processAppointmentDetails(String appointment) {
+		
+		String[] Details = new String[3];
+		Details=appointment.split("%");
+		
+		return Details;
+	}
+
 	public static String fileToString(String filePath) throws Exception{
 	      String input = null;
 	      Scanner sc = new Scanner(new File(filePath));
