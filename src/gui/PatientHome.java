@@ -96,19 +96,30 @@ public class PatientHome {
 			app.addElement(appoint); ////////change
 		}
 		
-		JButton ManageAppointmentBtn = new JButton("Manage Appointment(s)");
-		ManageAppointmentBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//update appointment
-			}
-		});
+		
 		JList list = new JList();
 		list.setFont(new Font("Courier New", Font.PLAIN, 13));
 		list.setModel(app);
 		list.setBounds(10, 36, 414, 157);
 		frame.getContentPane().add(list);
+		
+		
+		JButton ManageAppointmentBtn = new JButton("Manage Appointment(s)");
+		ManageAppointmentBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//update appointment
+				/*
+				 * String filename= "src/patientRecords/"+getUserName()+".txt";
+				int changeIndex=list.getSelectedIndex();
+				appointmentList[]
+				String changedRecord=writtenAppointmentIntoString(appointmentList,changeIndex);
+				*/
+			}
+		});
+		
 		ManageAppointmentBtn.setBounds(10, 230, 140, 25);
 		frame.getContentPane().add(ManageAppointmentBtn);
+		
 		
 		JButton DeleteAppointmentBtn = new JButton("Delete Appointment");
 
@@ -116,7 +127,7 @@ public class PatientHome {
 			public void actionPerformed(ActionEvent e) {
 				String filename= "src/patientRecords/"+getUserName()+".txt";
 				int delIndex=list.getSelectedIndex();
-				String delRecord=DelAppointmentIntoString(appointmentList,delIndex);
+				String delRecord=writtenAppointmentIntoString(appointmentList,delIndex);
 				//remove the record from file
 				if (delIndex>=0 && delIndex<appointmentList.size()) {
 					try {
@@ -144,15 +155,16 @@ public class PatientHome {
 		AddAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//take to doctors list --> calendar
+				AppointmentForm1.open();
 			}
 		});
 		AddAppointmentBtn.setBounds(146, 204, 140, 25);
 		frame.getContentPane().add(AddAppointmentBtn);
 	}
-	protected String DelAppointmentIntoString(ArrayList<String[]> appointmentList2, int delIndex) {
-		String[] array=appointmentList.get(delIndex);
-		String toBeDeleted= array[0]+"%"+array[1]+"%"+array[2];
-		return toBeDeleted;
+	protected String writtenAppointmentIntoString(ArrayList<String[]> appointmentList2, int index) {
+		String[] array=appointmentList.get(index);
+		String toBeupdated= array[0]+"%"+array[1]+"%"+array[2];
+		return toBeupdated;
 	}
 
 	private String appointmentIntoString(ArrayList<String[]> appointmentList, int i) {
