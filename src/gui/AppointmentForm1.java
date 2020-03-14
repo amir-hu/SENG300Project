@@ -21,11 +21,11 @@ public class AppointmentForm1 {
 	/**
 	 * Launch the application.
 	 */
-	public static void open() {
+	public static void open(String PatientUser) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AppointmentForm1 window = new AppointmentForm1();
+					AppointmentForm1 window = new AppointmentForm1(PatientUser);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,14 +37,14 @@ public class AppointmentForm1 {
 	/**
 	 * Create the application.
 	 */
-	public AppointmentForm1() {
-		initialize();
+	public AppointmentForm1(String PatientUser) {
+		initialize(PatientUser);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String PatientUser) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,8 +73,9 @@ public class AppointmentForm1 {
 					if (myReader.hasNextLine()) {
 				    	String username = myReader.nextLine();
 				    	DocUser.add(username);
-					}
-				} catch (FileNotFoundException e) {
+					} 
+				myReader.close();
+				}catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -88,7 +89,7 @@ public class AppointmentForm1 {
 		nextFormBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int docIndex=list.getSelectedIndex();
-				AppointmentForm2.open(DocUser.get(docIndex));
+				AppointmentForm2.open(DocUser.get(docIndex), PatientUser);
 			}
 		});
 		nextFormBtn.setBounds(175, 227, 89, 23);

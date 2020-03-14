@@ -76,7 +76,6 @@ public class PatientHome {
 		    	String[] apointmentDetails= processAppointmentDetails(appointment);
 		    	appointmentList.add(apointmentDetails);
 		    }
-		    System.out.print(appointmentList);
 		    myReader.close();
 		    } catch (FileNotFoundException e) {
 		    	System.out.println("An error occurred.");
@@ -155,7 +154,8 @@ public class PatientHome {
 		AddAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//take to doctors list --> calendar
-				AppointmentForm1.open();
+				String patientUser = getUserName();
+				AppointmentForm1.open(patientUser);
 			}
 		});
 		AddAppointmentBtn.setBounds(146, 204, 140, 25);
@@ -191,7 +191,7 @@ public class PatientHome {
 	      StringBuffer sb = new StringBuffer();
 	      while (sc.hasNextLine()) {
 	         input = sc.nextLine();
-	         sb.append(input+"\n");
+	         sb.append(input);
 	      }
 	      return sb.toString();
 	}
