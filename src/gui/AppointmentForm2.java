@@ -37,11 +37,11 @@ public class AppointmentForm2 {
 	/**
 	 * Launch the application.
 	 */
-	public static void open(String username, String PatientUser) {
+	public static void open(String username, String PatientUser, int i) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AppointmentForm2 window = new AppointmentForm2(username, PatientUser);
+					AppointmentForm2 window = new AppointmentForm2(username, PatientUser, i);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,27 +53,38 @@ public class AppointmentForm2 {
 	/**
 	 * Create the application.
 	 */
-	public AppointmentForm2(String username, String PatientUser) {
-		initialize(username, PatientUser);
+	public AppointmentForm2(String username, String PatientUser, int i) {
+		initialize(username, PatientUser, i);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String username, String PatientUser) {
+	private void initialize(String username, String PatientUser, int transition) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		JButton modifyBtn = new JButton("Modify");
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(258, 42, 152, 189);
 		frame.getContentPane().add(scrollPane);
 		JButton completeSelectionBtn = new JButton("Done");
 		completeSelectionBtn.setEnabled(false);
+		modifyBtn.setEnabled(false);
 		
 		JList list=new JList();
 		DefaultListModel app=new DefaultListModel<String>();
+		if (transition==0) {
+			completeSelectionBtn.setVisible(true);
+			modifyBtn.setVisible(false);
+		}else {
+			completeSelectionBtn.setVisible(false);
+			modifyBtn.setVisible(true);
+		}
 		//List<String> myList = new ArrayList<>();
 		
 		JDateChooser dateChooser = new JDateChooser();
@@ -131,7 +142,12 @@ public class AppointmentForm2 {
 				    }
 				list.setModel(app);
 				scrollPane.setViewportView(list);
-				completeSelectionBtn.setEnabled(true);
+				if(transition==0) {
+					completeSelectionBtn.setEnabled(true);
+				}else {
+					modifyBtn.setEnabled(true);
+				}
+				
 			}
 			
 		
@@ -183,11 +199,73 @@ public class AppointmentForm2 {
 						e2.printStackTrace();
 					}
 				}
-				
+				PatientHome.open(PatientUser);
 			}
 		});
 		completeSelectionBtn.setBounds(286, 238, 89, 23);
 		frame.getContentPane().add(completeSelectionBtn);
+		
+		modifyBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Need to change**************************************************************************************************************
+				if (list.getSelectedIndex()!=-1){
+					int timeIndex= list.getSelectedIndex();
+					String docName="";
+					File doctor = new File(filename);
+				    Scanner myReader;
+					try {
+						myReader = new Scanner(doctor);
+						if (myReader.hasNextLine()) {
+					    	docName=myReader.nextLine();
+					    } 
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					Date selectedDate=dateChooser.getDate();
+					Format formatter = new SimpleDateFormat("MM-dd-yyyy");
+					String date = formatter.format(selectedDate);
+				    String newRecord=date+"%"+app.get(timeIndex);
+					String newAppointment="Dr. "+docName+"%"+date+"%"+app.get(timeIndex);
+					System.out.println(newAppointment);
+					//add to Doctor's records
+					BufferedWriter docWriter;
+					try {
+						String oldAppointment= PatientHome.getOldAppointment("src/patientRecords/"+PatientUser+".txt/", docName);
+						System.out.println("old -- "+oldAppointment);
+						String contents= PatientHome.fileToString("src/doctorRecords/"+username+".txt/");
+						System.out.println("before: "+contents);
+						contents=contents.replaceAll(oldAppointment+"\n", newRecord+"\n");
+						System.out.println("after"+contents);
+						docWriter = new BufferedWriter(new FileWriter("src/doctorRecords/"+username+".txt/"));
+						docWriter.write(contents);
+						docWriter.close();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					//add to patients record
+					try {
+						String oldAppointment= PatientHome.getOldAppointment("src/patientRecords/"+PatientUser+".txt/", docName);
+						System.out.println("old--- "+oldAppointment);
+						String contents= PatientHome.fileToString("src/patientRecords/"+PatientUser+".txt/");
+						System.out.println("before: "+contents);
+						contents = contents.replaceAll("Dr. "+docName+"%"+oldAppointment+"\n", "Dr. "+docName+"%"+newRecord+"\n");
+						System.out.println("after: "+contents);
+						BufferedWriter writer = new BufferedWriter(new FileWriter("src/patientRecords/"+PatientUser+".txt/"));
+						writer.write(contents);
+						writer.close();
+					} catch (Exception e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+				}
+				PatientHome.open(PatientUser);
+			}
+		});
+		modifyBtn.setBounds(286, 238, 89, 23);
+		frame.getContentPane().add(modifyBtn);
 		
 		JButton CancelButton_form2 = new JButton("Cancel");
 		CancelButton_form2.addActionListener(new ActionListener() {

@@ -108,7 +108,7 @@ public class AppointmentForm1 {
 			public void actionPerformed(ActionEvent arg0) {
 				if(list.getSelectedIndex()!=-1) {
 					int docIndex=list.getSelectedIndex();
-					AppointmentForm2.open(DocUser.get(docIndex), PatientUser);
+					AppointmentForm2.open(DocUser.get(docIndex), PatientUser, 0);
 				}	
 			}
 		});

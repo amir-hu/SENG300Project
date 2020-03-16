@@ -107,6 +107,32 @@ public class PatientHome {
 		ManageAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//update appointment
+				int modifyIndex=list.getSelectedIndex();
+				String docAppointmentToUpdate= appointmentList.get(modifyIndex)[0];
+				File folder = new File("src/doctorRecords/");
+				File[] listOfFiles = folder.listFiles();
+				String docUsername=new String();
+				for (File file : listOfFiles) {
+				    if (file.isFile()) {
+				    	Scanner docReader;
+					    try {
+							docReader=new Scanner(file);
+							if (docReader.hasNextLine()) {
+								String docName="Dr. "+docReader.nextLine();
+								if (docName.equals(docAppointmentToUpdate)) {	
+									if (docReader.hasNextLine()){
+										docUsername=docReader.nextLine();
+										break;
+									}
+								}
+							}
+						} catch (FileNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				    }
+				}
+				AppointmentForm2.open(docUsername, getUserName(), 1);
 				/*
 				 * String filename= "src/patientRecords/"+getUserName()+".txt";
 				int changeIndex=list.getSelectedIndex();
@@ -242,6 +268,35 @@ public class PatientHome {
 	      }
 	      String output=sb.toString();
 	      return output;//.substring(0, output.length()-1);
+	}
+	public static String getOldAppointment(String patientFile, String docName) {
+		String output = new String();
+		String appointmentDoc;
+	    try {
+			Scanner sc = new Scanner(new File(patientFile));
+			for (int k=0; k<4; k++) {
+				if (sc.hasNextLine()) {
+					appointmentDoc=sc.nextLine();
+					//System.out.println("doctor: "+ appointmentDoc);
+				}
+	    	}
+			while (sc.hasNextLine()) {
+				String[] record=sc.nextLine().split("%");
+				appointmentDoc=record[0];
+				System.out.println("doctor: "+ appointmentDoc);
+				if(appointmentDoc.equals("Dr. "+docName)) {
+					
+					output=record[1]+"%"+record[2];
+					System.out.println("output: "+ output);
+					break;
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return output;
 	}
 
 	public String getUserName() {

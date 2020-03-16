@@ -3,5 +3,5 @@ Amirh
 password
 someemail@email.com
 Dr. Jackson%03-30-2020%15:00 Hrs
-Dr. Sonjack%03-11-2020%12:30 Hrs
+Dr. Sonjack%03-11-2020%12:00 Hrs
 Dr. Aly%03-20-2020%15:00 Hrs
