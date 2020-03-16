@@ -166,7 +166,7 @@ public class AppointmentForm2 {
 					BufferedWriter docWriter;
 					try {
 						docWriter = new BufferedWriter(new FileWriter("src/doctorRecords/"+username+".txt/",true));
-						docWriter.write("\n"+newRecord);
+						docWriter.write(newRecord+"\n");
 						docWriter.close();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
@@ -176,7 +176,7 @@ public class AppointmentForm2 {
 					//add to patients record
 					try {
 						BufferedWriter writer = new BufferedWriter(new FileWriter("src/patientRecords/"+PatientUser+".txt/",true));
-						writer.write("\n"+newAppointment);
+						writer.write(newAppointment+"\n");
 						writer.close();
 					} catch (IOException e2) {
 						// TODO Auto-generated catch block

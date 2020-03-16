@@ -124,27 +124,74 @@ public class PatientHome {
 
 		DeleteAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String filename= "src/patientRecords/"+getUserName()+".txt";
-				int delIndex=list.getSelectedIndex();
-				String delRecord=writtenAppointmentIntoString(appointmentList,delIndex);
-				//remove the record from file
-				if (delIndex>=0 && delIndex<appointmentList.size()) {
-					try {
-						String contents= fileToString(filename);
-						contents = contents.replaceAll(delRecord+"\n", "");
-						PrintWriter writer = new PrintWriter(new File(filename));
-					    writer.append(contents);
-					    writer.flush();
-					    writer.close();
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+				if (!(list.isSelectionEmpty())) {
+					String filename= "src/patientRecords/"+getUserName()+".txt";
+					int delIndex=list.getSelectedIndex();
+					String delRecord=writtenAppointmentIntoString(appointmentList,delIndex);
+					//remove the record from file
+					if (delIndex>=0 && delIndex<appointmentList.size()) {
+						try {
+							String contents= fileToString(filename);
+							contents = contents.replaceAll(delRecord+"\n", "");
+							PrintWriter writer = new PrintWriter(new File(filename));
+						    writer.append(contents);
+						    writer.flush();
+						    writer.close();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						app.removeElementAt(delIndex);
+						list.setModel(app);
+						//List of appointments
 					}
+					File folder = new File("src/doctorRecords/");
+					File[] listOfFiles = folder.listFiles();
+					String docUsername=new String();
+					for (File file : listOfFiles) {
+					    if (file.isFile()) {
+					    	Scanner docReader;
+						    try {
+								docReader=new Scanner(file);
+								if (docReader.hasNextLine()) {
+									String docName="Dr. "+docReader.nextLine();
+									System.out.println("docName: "+docName);
+									if (docName.equals(appointmentList.get(delIndex)[0])) {
+										System.out.println("docName found");
+										if (docReader.hasNextLine()){
+											docUsername=docReader.nextLine();
+											break;
+										}
+									}
+								}
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					    }
+					}
+					
+					String docFilename= "src/doctorRecords/"+docUsername+".txt";
+					String delAppointment=appointmentList.get(delIndex)[1]+"%"+appointmentList.get(delIndex)[2].trim();
+					if (delIndex>=0 && delIndex<appointmentList.size()) {
+						try {
+							String contents= fileToString(docFilename);
+							System.out.println("now deleting");
+							contents = contents.replaceAll(delAppointment+"\n", "");
+							PrintWriter writer = new PrintWriter(new File(docFilename));
+						    writer.append(contents);
+						    writer.flush();
+						    writer.close();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					
 					appointmentList.remove(delIndex);
-					app.removeElementAt(delIndex);
-					list.setModel(app);
-					//List of appointments
 				}
+				
 			}
 		});
 		DeleteAppointmentBtn.setBounds(284, 230, 140, 25);
@@ -155,7 +202,7 @@ public class PatientHome {
 			public void actionPerformed(ActionEvent arg0) {
 				//take to doctors list --> calendar
 				String patientUser = getUserName();
-				AppointmentForm1.open(patientUser);
+				AppointmentForm1.open(patientUser, getAppointmentList());
 			}
 		});
 		AddAppointmentBtn.setBounds(146, 204, 140, 25);
@@ -163,7 +210,7 @@ public class PatientHome {
 	}
 	protected String writtenAppointmentIntoString(ArrayList<String[]> appointmentList2, int index) {
 		String[] array=appointmentList.get(index);
-		String toBeupdated= array[0]+"%"+array[1]+"%"+array[2];
+		String toBeupdated= array[0]+"%"+array[1]+"%"+array[2].trim();
 		return toBeupdated;
 	}
 
@@ -191,9 +238,10 @@ public class PatientHome {
 	      StringBuffer sb = new StringBuffer();
 	      while (sc.hasNextLine()) {
 	         input = sc.nextLine();
-	         sb.append(input);
+	         sb.append(input+"\n");
 	      }
-	      return sb.toString();
+	      String output=sb.toString();
+	      return output;//.substring(0, output.length()-1);
 	}
 
 	public String getUserName() {
@@ -202,6 +250,10 @@ public class PatientHome {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	
+	public ArrayList<String[]> getAppointmentList() {
+		return this.appointmentList;
 	}
 	
 }
