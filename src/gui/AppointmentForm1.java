@@ -106,12 +106,23 @@ public class AppointmentForm1 {
 		JButton nextFormBtn = new JButton("Next");
 		nextFormBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int docIndex=list.getSelectedIndex();
-				AppointmentForm2.open(DocUser.get(docIndex), PatientUser);
+				if(list.getSelectedIndex()!=-1) {
+					int docIndex=list.getSelectedIndex();
+					AppointmentForm2.open(DocUser.get(docIndex), PatientUser);
+				}	
 			}
 		});
 		nextFormBtn.setBounds(175, 227, 89, 23);
 		frame.getContentPane().add(nextFormBtn);
+		
+		JButton cancelButton_Form1 = new JButton("Cancel");
+		cancelButton_Form1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PatientHome.open(PatientUser);
+			}
+		});
+		cancelButton_Form1.setBounds(0, 11, 89, 23);
+		frame.getContentPane().add(cancelButton_Form1);
 	}
 
 }

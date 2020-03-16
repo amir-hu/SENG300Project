@@ -188,5 +188,14 @@ public class AppointmentForm2 {
 		});
 		completeSelectionBtn.setBounds(286, 238, 89, 23);
 		frame.getContentPane().add(completeSelectionBtn);
+		
+		JButton CancelButton_form2 = new JButton("Cancel");
+		CancelButton_form2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PatientHome.open(PatientUser);
+			}
+		});
+		CancelButton_form2.setBounds(0, 11, 89, 23);
+		frame.getContentPane().add(CancelButton_form2);
 	}
 }
