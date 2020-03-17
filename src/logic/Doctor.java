@@ -37,7 +37,7 @@ public class Doctor extends User {
 	public String Authenticate(String username,String password) {
 		String response =super.Authenticate("src/doctorRecords/" + username + ".txt", password);
 		Doctor.name = super.name;
-		Doctor.username = super.username;
+		Doctor.username = super.username; 
 		return response;
 	}
 	

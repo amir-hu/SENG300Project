@@ -9,6 +9,9 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import logic.Mail;
+
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -203,6 +206,8 @@ public class PatientHome {
 					if (delIndex>=0 && delIndex<appointmentList.size()) {
 						try {
 							String contents= fileToString(docFilename);
+							Mail.Send("Your appointment on " + delAppointment + " has now been deleated",
+									"legitmedicalcentre@gmail.com");
 							System.out.println("now deleting");
 							contents = contents.replaceAll(delAppointment+"\n", "");
 							PrintWriter writer = new PrintWriter(new File(docFilename));
