@@ -1,5 +1,5 @@
 package gui;
-import java.awt.EventQueue;
+import java.awt.EventQueue;	
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -137,6 +137,8 @@ public class LogIn {
 					PatientHome.open(username);
 					}if(index==0) {
 						DoctorHome.run();
+					}if(index==2) {
+						AdminHome.run();
 					}
 				}else if(attempt.equals("false")) {
 					JOptionPane.showMessageDialog(frame, "Log in information incorrect try again","ERROR", JOptionPane.ERROR_MESSAGE);
