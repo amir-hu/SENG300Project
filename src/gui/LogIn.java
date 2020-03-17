@@ -134,10 +134,13 @@ public class LogIn {
 				if(attempt.equals("true")) {
 					//no issues move on to the next screen
 					if(index==1) {
-					PatientHome.open(username);
+						frame.setVisible(false);
+						PatientHome.open(username);
 					}if(index==0) {
+						frame.setVisible(false);
 						DoctorHome.run();
 					}if(index==2) {
+						frame.setVisible(false);
 						AdminHome.run();
 					}
 				}else if(attempt.equals("false")) {

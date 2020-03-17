@@ -54,7 +54,7 @@ public class PatientHome {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 914, 515);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		//reads the file
@@ -85,8 +85,9 @@ public class PatientHome {
 		    	e.printStackTrace();
 		    }
 		JLabel UserName = new JLabel("Hello "+name);
+		UserName.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		UserName.setHorizontalAlignment(SwingConstants.CENTER);
-		UserName.setBounds(10, 11, 414, 14);
+		UserName.setBounds(10, 0, 878, 25);
 		frame.getContentPane().add(UserName);
 		
 		DefaultListModel app=new DefaultListModel();
@@ -102,40 +103,44 @@ public class PatientHome {
 		JList list = new JList();
 		list.setFont(new Font("Courier New", Font.PLAIN, 13));
 		list.setModel(app);
-		list.setBounds(10, 36, 414, 157);
+		list.setBounds(20, 36, 606, 397);
 		frame.getContentPane().add(list);
 		
 		
 		JButton ManageAppointmentBtn = new JButton("Manage Appointment(s)");
+		ManageAppointmentBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		ManageAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//update appointment
-				int modifyIndex=list.getSelectedIndex();
-				String docAppointmentToUpdate= appointmentList.get(modifyIndex)[0];
-				File folder = new File("src/doctorRecords/");
-				File[] listOfFiles = folder.listFiles();
-				String docUsername=new String();
-				for (File file : listOfFiles) {
-				    if (file.isFile()) {
-				    	Scanner docReader;
-					    try {
-							docReader=new Scanner(file);
-							if (docReader.hasNextLine()) {
-								String docName="Dr. "+docReader.nextLine();
-								if (docName.equals(docAppointmentToUpdate)) {	
-									if (docReader.hasNextLine()){
-										docUsername=docReader.nextLine();
-										break;
+				if(list.getSelectedIndex()!=-1) {
+					int modifyIndex=list.getSelectedIndex();
+					String docAppointmentToUpdate= appointmentList.get(modifyIndex)[0];
+					File folder = new File("src/doctorRecords/");
+					File[] listOfFiles = folder.listFiles();
+					String docUsername=new String();
+					for (File file : listOfFiles) {
+					    if (file.isFile()) {
+					    	Scanner docReader;
+						    try {
+								docReader=new Scanner(file);
+								if (docReader.hasNextLine()) {
+									String docName="Dr. "+docReader.nextLine();
+									if (docName.equals(docAppointmentToUpdate)) {	
+										if (docReader.hasNextLine()){
+											docUsername=docReader.nextLine();
+											break;
+										}
 									}
 								}
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
 							}
-						} catch (FileNotFoundException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-				    }
+					    }
+					}
+					frame.setVisible(false);
+					AppointmentForm2.open(docUsername, getUserName(), 1);
 				}
-				AppointmentForm2.open(docUsername, getUserName(), 1);
 				/*
 				 * String filename= "src/patientRecords/"+getUserName()+".txt";
 				int changeIndex=list.getSelectedIndex();
@@ -145,11 +150,12 @@ public class PatientHome {
 			}
 		});
 		
-		ManageAppointmentBtn.setBounds(10, 230, 140, 25);
+		ManageAppointmentBtn.setBounds(645, 337, 243, 47);
 		frame.getContentPane().add(ManageAppointmentBtn);
 		
 		
 		JButton DeleteAppointmentBtn = new JButton("Delete Appointment");
+		DeleteAppointmentBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		DeleteAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -225,18 +231,20 @@ public class PatientHome {
 				
 			}
 		});
-		DeleteAppointmentBtn.setBounds(284, 230, 140, 25);
+		DeleteAppointmentBtn.setBounds(645, 190, 243, 47);
 		frame.getContentPane().add(DeleteAppointmentBtn);
 		
 		JButton AddAppointmentBtn = new JButton("Add Appointment");
+		AddAppointmentBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		AddAppointmentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//take to doctors list --> calendar
 				String patientUser = getUserName();
+				frame.setVisible(false);
 				AppointmentForm1.open(patientUser, getAppointmentList());
 			}
 		});
-		AddAppointmentBtn.setBounds(146, 204, 140, 25);
+		AddAppointmentBtn.setBounds(645, 57, 243, 47);
 		frame.getContentPane().add(AddAppointmentBtn);
 	}
 	protected String writtenAppointmentIntoString(ArrayList<String[]> appointmentList2, int index) {
