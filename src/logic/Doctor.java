@@ -11,10 +11,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Doctor extends User {
+	private String firstName;
+	private String lastName;
+	private String userName;
+	private String email;
+	private String password;
 
 	public static String name = "test";
 	private static String username = "";
 	public ArrayList<String> schedule = new ArrayList<String>(); 
+	
+	public Doctor(String fname,String lName, String username,String email,String password) {
+		firstName = fname;
+		lastName = lName;
+		this.userName = username;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public Doctor() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 	public String Authenticate(String username,String password) {
 		String response =super.Authenticate("src/doctorRecords/" + username + ".txt", password);
@@ -61,6 +79,18 @@ public class Doctor extends User {
 		}
 //		wr.write(firstName + " " + lastName + "\n" + username + "\n" + password + "\n" + email);
 		
+	}
+	
+
+	public void create() {
+		try {
+			Writer wr = new FileWriter("src/doctorRecords/"+userName + ".txt");
+			wr.write(firstName + " " + lastName + "\n" + userName + "\n" + password + "\n" + email);
+			wr.flush();wr.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 }
