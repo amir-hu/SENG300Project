@@ -56,6 +56,18 @@ public class AdminHome {
 		JLabel lblWelcomeAd = new JLabel("Welcome " + Admin.name);
 		lblWelcomeAd.setBounds(384, 13, 154, 16);
 		frame.getContentPane().add(lblWelcomeAd);
+		
+		JButton btnNewDoctor = new JButton("New Doctor");
+		btnNewDoctor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NewDoctor start = new NewDoctor();
+				start.open();
+			}
+		});
+		btnNewDoctor.setBounds(84, 26, 183, 25);
+		frame.getContentPane().add(btnNewDoctor);
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }

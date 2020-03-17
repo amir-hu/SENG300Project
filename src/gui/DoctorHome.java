@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+
 import logic.*;
 
 import javax.swing.JFrame;
