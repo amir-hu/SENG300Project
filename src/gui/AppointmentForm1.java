@@ -108,6 +108,7 @@ public class AppointmentForm1 {
 			public void actionPerformed(ActionEvent arg0) {
 				if(list.getSelectedIndex()!=-1) {
 					int docIndex=list.getSelectedIndex();
+					frame.setVisible(false);
 					AppointmentForm2.open(DocUser.get(docIndex), PatientUser, 0);
 				}	
 			}
@@ -118,6 +119,7 @@ public class AppointmentForm1 {
 		JButton cancelButton_Form1 = new JButton("Cancel");
 		cancelButton_Form1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
 				PatientHome.open(PatientUser);
 			}
 		});

@@ -199,6 +199,7 @@ public class AppointmentForm2 {
 						e2.printStackTrace();
 					}
 				}
+				frame.setVisible(false);
 				PatientHome.open(PatientUser);
 			}
 		});
@@ -261,6 +262,7 @@ public class AppointmentForm2 {
 						e2.printStackTrace();
 					}
 				}
+				frame.setVisible(false);
 				PatientHome.open(PatientUser);
 			}
 		});
@@ -270,6 +272,7 @@ public class AppointmentForm2 {
 		JButton CancelButton_form2 = new JButton("Cancel");
 		CancelButton_form2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frame.setVisible(false);
 				PatientHome.open(PatientUser);
 			}
 		});
