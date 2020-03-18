@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class AppointmentForm1 {
 
@@ -125,6 +127,10 @@ public class AppointmentForm1 {
 		});
 		cancelButton_Form1.setBounds(0, 11, 89, 23);
 		frame.getContentPane().add(cancelButton_Form1);
+		
+		JLabel lblNewLabel = new JLabel("Doctor selection");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(160, 31, 111, 23);
+		frame.getContentPane().add(lblNewLabel);
 	}
-
 }

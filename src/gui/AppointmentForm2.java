@@ -29,6 +29,8 @@ import java.awt.Button;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class AppointmentForm2 {
 
@@ -278,5 +280,15 @@ public class AppointmentForm2 {
 		});
 		CancelButton_form2.setBounds(0, 11, 89, 23);
 		frame.getContentPane().add(CancelButton_form2);
+		
+		JLabel lblNewLabel = new JLabel("Select Appointment Date");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 55, 168, 17);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Select Appointment Time");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(258, 25, 152, 14);
+		frame.getContentPane().add(lblNewLabel_1);
 	}
 }
