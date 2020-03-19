@@ -64,8 +64,20 @@ public class AdminHome {
 				start.open();
 			}
 		});
-		btnNewDoctor.setBounds(84, 26, 183, 25);
+		btnNewDoctor.setBounds(93, 43, 183, 25);
 		frame.getContentPane().add(btnNewDoctor);
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JButton btnEditSchedule = new JButton("Edit Doctor Schedule");
+		btnEditSchedule.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditSchedule start = new EditSchedule();
+				start.open();
+			}
+		});
+		btnEditSchedule.setBounds(93, 103, 183, 25);
+		frame.getContentPane().add(btnEditSchedule);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

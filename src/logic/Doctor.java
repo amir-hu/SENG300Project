@@ -16,17 +16,17 @@ public class Doctor extends User {
 	private String userName;
 	private String email;
 	private String password;
+	private String position;
 
 	public static String name = "test";
 	private static String username = "";
 	public ArrayList<String> schedule = new ArrayList<String>(); 
 	
-	public Doctor(String fname,String lName, String username,String email,String password) {
+	public Doctor(String fname, String username,String password,String position) {
 		firstName = fname;
-		lastName = lName;
 		this.userName = username;
-		this.email = email;
 		this.password = password;
+		this.position = position;
 	}
 	
 	public Doctor() {
@@ -85,7 +85,7 @@ public class Doctor extends User {
 	public void create() {
 		try {
 			Writer wr = new FileWriter("src/doctorRecords/"+userName + ".txt");
-			wr.write(firstName + " " + lastName + "\n" + userName + "\n" + password + "\n" + email);
+			wr.write(firstName + " " + userName + "\n" + password + "\n" + position);
 			wr.flush();wr.close();
 		} catch (IOException e) {
 			

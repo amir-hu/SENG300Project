@@ -15,10 +15,9 @@ import javax.swing.JTextField;
 public class NewDoctor {
 
 	private JFrame frame;
-	private JTextField txtEnterFirstName;
-	private JTextField txtEnterLastName;
-	private JTextField txtEnterEmailAddress;
+	private JTextField txtEnterName;
 	private JTextField txtEnterUsername;
+	private JTextField txtEnterPosition;
 	private JPasswordField passwordField;
 
 	/**
@@ -53,29 +52,27 @@ public class NewDoctor {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		txtEnterFirstName = new JTextField();
-		txtEnterFirstName.setText("Enter First Name");
-		txtEnterFirstName.setBounds(131, 13, 116, 22);
-		frame.getContentPane().add(txtEnterFirstName);
-		txtEnterFirstName.setColumns(10);
-		
-		txtEnterLastName = new JTextField();
-		txtEnterLastName.setText("Enter Last Name");
-		txtEnterLastName.setBounds(131, 48, 116, 22);
-		frame.getContentPane().add(txtEnterLastName);
-		txtEnterLastName.setColumns(10);
-		
-		txtEnterEmailAddress = new JTextField();
-		txtEnterEmailAddress.setText("Enter Email Address");
-		txtEnterEmailAddress.setBounds(131, 89, 116, 22);
-		frame.getContentPane().add(txtEnterEmailAddress);
-		txtEnterEmailAddress.setColumns(10);
+		txtEnterName = new JTextField();
+		txtEnterName.setText("Enter Name");
+		txtEnterName.setBounds(131, 13, 116, 22);
+		frame.getContentPane().add(txtEnterName);
+		txtEnterName.setColumns(10);
 		
 		txtEnterUsername = new JTextField();
 		txtEnterUsername.setText("Enter Username");
-		txtEnterUsername.setBounds(131, 124, 116, 22);
+		txtEnterUsername.setBounds(131, 48, 116, 22);
 		frame.getContentPane().add(txtEnterUsername);
 		txtEnterUsername.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(131, 89, 116, 22);
+		frame.getContentPane().add(passwordField);
+		
+		txtEnterPosition = new JTextField();
+		txtEnterPosition.setText("Enter Position");
+		txtEnterPosition.setBounds(131, 124, 116, 22);
+		frame.getContentPane().add(txtEnterPosition);
+		txtEnterPosition.setColumns(10);
 		
 		JButton btnHitToCreate = new JButton("Hit to Create Account");
 		btnHitToCreate.addActionListener(new ActionListener() {
@@ -85,8 +82,8 @@ public class NewDoctor {
 				for(int i = 0;i < pass.length;i++ ) {
 					password = password + pass[i];
 				}
-				Doctor doc = new Doctor(txtEnterFirstName.getText(),txtEnterLastName.getText(),
-						txtEnterUsername.getText(),txtEnterEmailAddress.getText(),password);
+				Doctor doc = new Doctor(txtEnterName.getText(),txtEnterUsername.getText(),
+						txtEnterPosition.getText(),password);
 				doc.create();
 				System.exit(-1);
 				
@@ -94,10 +91,7 @@ public class NewDoctor {
 		});
 		btnHitToCreate.setBounds(116, 215, 166, 25);
 		frame.getContentPane().add(btnHitToCreate);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(131, 165, 116, 22);
-		frame.getContentPane().add(passwordField);
+	
 		
 	}
 
