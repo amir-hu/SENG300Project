@@ -69,7 +69,7 @@ public class AdminHome {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton btnEditSchedule = new JButton("Edit Doctor Schedule");
+		JButton btnEditSchedule = new JButton("Edit Doctor/Patients Schedule");
 		btnEditSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				EditSchedule start = new EditSchedule();
