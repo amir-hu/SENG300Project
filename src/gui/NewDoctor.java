@@ -83,7 +83,7 @@ public class NewDoctor {
 					password = password + pass[i];
 				}
 				Doctor doc = new Doctor(txtEnterName.getText(),txtEnterUsername.getText(),
-						txtEnterPosition.getText(),password);
+						password,txtEnterPosition.getText());
 				doc.create();
 				System.exit(-1);
 				
