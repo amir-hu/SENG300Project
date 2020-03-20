@@ -63,7 +63,7 @@ public class DoctorHome {
 		Calendar calender = Calendar.getInstance();
 		String[] free = new String[14];
 		for(int i = 0;i<14;i++) {
-			free[i] = Integer.toString(calender.get(Calendar.YEAR)) + "/" + (calender.get(Calendar.MONTH) + 1) + "/" + Integer.toString(calender.get(Calendar.DATE));
+			free[i] = Integer.toString(calender.get(Calendar.MONTH ) + 1) + "-" + (calender.get(Calendar.DATE)) + "-" + Integer.toString(calender.get(Calendar.YEAR));
 			calender.add(Calendar.DATE,1);
 		}
 		String[] timeFree = new String[10];
@@ -82,7 +82,7 @@ public class DoctorHome {
 		JButton btnAddToSchedule = new JButton("Add To Schedule");
 		btnAddToSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				doc.schedule.add(comboBox.getSelectedItem() + " " + comboBox_1.getSelectedItem());
+				doc.schedule.add(comboBox.getSelectedItem() + "%" + comboBox_1.getSelectedItem() + "Hrs");
 				doc.updateSchedule();
 				list.setListData(doc.schedule.toArray());
 				

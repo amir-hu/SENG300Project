@@ -49,12 +49,12 @@ public class AdminHome {
 	private void initialize() {
 		Admin admin = new Admin();
 		frame = new JFrame();
-		frame.setBounds(100, 100, 914, 515);
+		frame.setBounds(100, 100, 622, 356);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		System.out.println(Admin.name);
 		JLabel lblWelcomeAd = new JLabel("Welcome " + Admin.name);
-		lblWelcomeAd.setBounds(384, 13, 154, 16);
+		lblWelcomeAd.setBounds(121, 13, 154, 16);
 		frame.getContentPane().add(lblWelcomeAd);
 		
 		JButton btnNewDoctor = new JButton("New Doctor");
@@ -64,7 +64,7 @@ public class AdminHome {
 				start.open();
 			}
 		});
-		btnNewDoctor.setBounds(93, 43, 183, 25);
+		btnNewDoctor.setBounds(121, 68, 183, 25);
 		frame.getContentPane().add(btnNewDoctor);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,7 +76,7 @@ public class AdminHome {
 				start.open();
 			}
 		});
-		btnEditSchedule.setBounds(93, 103, 183, 25);
+		btnEditSchedule.setBounds(121, 144, 183, 25);
 		frame.getContentPane().add(btnEditSchedule);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
