@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -82,10 +83,25 @@ public class DoctorHome {
 		JButton btnAddToSchedule = new JButton("Add To Schedule");
 		btnAddToSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				doc.schedule.add(comboBox.getSelectedItem() + "%" + comboBox_1.getSelectedItem() + "Hrs");
 				doc.updateSchedule();
 				list.setListData(doc.schedule.toArray());
 				
+
+					
+				//if/else added for when schedule slot already taken
+				if(doc.showSchedule().contains(comboBox.getSelectedItem() + " " + comboBox_1.getSelectedItem())) {
+						JOptionPane.showMessageDialog(frame, "Error: Schedule Slot Taken");
+						System.out.println(comboBox.getSelectedItem() + " " + comboBox_1.getSelectedItem());
+				}
+				else {
+						doc.schedule.add(comboBox.getSelectedItem() + " " + comboBox_1.getSelectedItem());
+						doc.updateSchedule();
+						list.setListData(doc.schedule.toArray());
+						JOptionPane.showMessageDialog(frame, "Appointment Added");
+				}
+
 			}
 		});
 		btnAddToSchedule.setBounds(557, 222, 154, 25);
