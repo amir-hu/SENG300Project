@@ -21,6 +21,7 @@ public class Doctor extends User {
 	public static String name = "test";
 	private static String username = "";
 	public ArrayList<String> schedule = new ArrayList<String>(); 
+	public ArrayList<String> scheduleWithDetails= new ArrayList<String>(); 
 	
 	public Doctor(String fname, String username,String password,String position) {
 		firstName = fname;
@@ -46,8 +47,11 @@ public class Doctor extends User {
 		try {
 			Scanner scan = new Scanner(file);
 			scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();
+			int i = 0;
 			while(scan.hasNextLine()) {
-				schedule.add(scan.nextLine());
+				String time = scan.nextLine(); 
+				schedule.add(time.split("% With ")[0]);
+				scheduleWithDetails.add(time);
 			}
 			scan.close();
 		} catch (FileNotFoundException e) {
@@ -72,8 +76,8 @@ public class Doctor extends User {
 			scan.close();
 			Writer wr = new FileWriter("src/doctorRecords/"+username + ".txt");
 			wr.write(allfile);
-			for(int i = 0;i < schedule.size();i++) {
-				wr.write("\n" + schedule.get(i));
+			for(int i = 0;i < scheduleWithDetails.size();i++) {
+				wr.write("\n" + scheduleWithDetails.get(i));
 			}
 			wr.flush();wr.close();
 			System.out.println("WROTE TO FILE");
