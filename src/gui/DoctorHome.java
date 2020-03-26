@@ -82,7 +82,7 @@ public class DoctorHome {
 		JButton btnAddToSchedule = new JButton("Add To Schedule");
 		btnAddToSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				doc.schedule.add(comboBox.getSelectedItem() + "%" + comboBox_1.getSelectedItem() + "Hrs");
+				doc.schedule.add(comboBox.getSelectedItem() + "%" + comboBox_1.getSelectedItem() + " Hrs");
 				doc.updateSchedule();
 				list.setListData(doc.schedule.toArray());
 				
