@@ -57,6 +57,10 @@ public class Doctor extends User {
 		return schedule;
 	}
 	
+	public List<String> showSchedule() {
+		return schedule;
+	}
+	
 	
 	public void updateSchedule() {
 		
