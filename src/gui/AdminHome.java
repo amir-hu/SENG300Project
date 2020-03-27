@@ -64,20 +64,32 @@ public class AdminHome {
 				start.open();
 			}
 		});
-		btnNewDoctor.setBounds(121, 68, 183, 25);
+		btnNewDoctor.setBounds(121, 72, 183, 25);
 		frame.getContentPane().add(btnNewDoctor);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton btnEditSchedule = new JButton("Edit Doctor Schedule");
-		btnEditSchedule.addActionListener(new ActionListener() {
+		JButton btnEditDoctorSchedule = new JButton("Edit Doctor Schedule");
+		btnEditDoctorSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				EditSchedule start = new EditSchedule();
 				start.open();
 			}
 		});
-		btnEditSchedule.setBounds(121, 144, 183, 25);
-		frame.getContentPane().add(btnEditSchedule);
+		btnEditDoctorSchedule.setBounds(121, 125, 183, 25);
+		frame.getContentPane().add(btnEditDoctorSchedule);
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JButton btnEditPatientSchedule = new JButton("Edit Patient Schedule");
+		btnEditPatientSchedule.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditPatientSchedule start = new EditPatientSchedule();
+				start.open();
+			}
+		});
+		btnEditPatientSchedule.setBounds(121, 178, 183, 25);
+		frame.getContentPane().add(btnEditPatientSchedule);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
