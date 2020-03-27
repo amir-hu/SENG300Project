@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -68,84 +71,46 @@ public class EditSchedule {
 		frame.getContentPane().setFont(new Font("Arial", Font.PLAIN, 13));
 		frame.getContentPane().setBackground(new Color(0, 0, 153));
 		
-		label_2 = new JLabel("");
-		label_2.setBounds(0, 219, 432, 31);
-		frame.getContentPane().setLayout(null);
 		
-		JTextPane txtpnUsername = new JTextPane();
-		txtpnUsername.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				txtpnUsername.setText("");
-			}
-		});
-		txtpnUsername.setBounds(84, 64, 183, 31);
-		txtpnUsername.setText("Username");
-		
-		frame.getContentPane().add(txtpnUsername);
-		
-		pwdPassword = new JPasswordField();
-		pwdPassword.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				pwdPassword.setText("");
-			}
-		});
-		pwdPassword.setBounds(84, 95, 183, 31);
-		pwdPassword.setHorizontalAlignment(SwingConstants.LEFT);
-		pwdPassword.setBackground(Color.WHITE);
-		pwdPassword.setEchoChar('*');
-		pwdPassword.setText("Password");
-		frame.getContentPane().add(pwdPassword);
-		
-		label_5 = new JLabel("");
-		label_5.setBounds(0, 95, 432, 31);
-		frame.getContentPane().add(label_5);
+		File folder = new File("src/doctorRecords/");
+		ArrayList <String> namestxt = new ArrayList <String>();
+		namestxt.addAll(Arrays.asList(folder.list()));
+		ArrayList <String> names = new ArrayList <String>();
 		
 		JButton btnConfirm = new JButton("Confirm");
-		btnConfirm.setBounds(84, 157, 183, 31);
+		btnConfirm.setBounds(166, 115, 89, 45);
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String username = txtpnUsername.getText().trim();
-				char[] password = pwdPassword.getPassword();
-				String pass = "";
-				for(int i = 0; i<password.length;i++) {
-					pass = pass + password[i];
-				}
-				String attempt = "";
 				int index = list.getSelectedIndex();
-				User use = arr[index];
-				attempt = use.Authenticate(username, pass);
-				if(attempt.equals("true")) {
-					//no issues move on to the next screen
-					if(index==1) {
-					PatientHome.open(username);
-					}if(index==0) {
-						DoctorHome.run();
-					}
-				}else if(attempt.equals("false")) {
-					JOptionPane.showMessageDialog(frame, "Log in information incorrect try again","ERROR", JOptionPane.ERROR_MESSAGE);
-				}else if(attempt.equals("DNE")) {
-					JOptionPane.showMessageDialog(frame, "Account does not exist ");
-				}
-				
-				System.out.println(username + pass + index);
-//				System.exit(-1);
+				Doctor doc = new Doctor(names.get(index));
+				DoctorHome.run();
 			}
 		});
 		
-		list = new JComboBox();
-		list.setBounds(84, 126, 183, 31);
-		list.setModel(new DefaultComboBoxModel(new String[] {"Doctor", "Patient"}));
+
+		for(int i = 0; i < namestxt.size(); i++)
+	      {
+	          if(namestxt.get(i).contains(".txt"))
+	          {
+	              names.add(namestxt.get(i).replace(".txt", ""));
+	             
+	          } 
+	       }
+		frame.getContentPane().setLayout(null);
 		
+		list = new JComboBox();
+		list.setBounds(122, 59, 183, 31);
+		list.setModel(new DefaultComboBoxModel<>(names.toArray(new String[names.size()])));
 				list.setSelectedIndex(1);
 				frame.getContentPane().add(list);
 		frame.getContentPane().add(btnConfirm);
 		
 		label_8 = new JLabel("");
 		label_8.setBounds(0, 188, 432, 31);
-		frame.getContentPane().add(label_8);
-		frame.getContentPane().add(label_2);
+		frame.getContentPane().add(label_8);;
+		frame.getContentPane().add(btnConfirm);
+		
+		
 		
 	}
 

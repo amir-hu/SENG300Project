@@ -13,7 +13,6 @@ import java.util.Scanner;
 public class Doctor extends User {
 	private String firstName;
 	private String lastName;
-	private String userName;
 	private String email;
 	private String password;
 	private String position;
@@ -25,9 +24,21 @@ public class Doctor extends User {
 	
 	public Doctor(String fname, String username,String password,String position) {
 		firstName = fname;
-		this.userName = username;
+		this.username = username;
 		this.password = password;
 		this.position = position;
+	}
+	
+	public Doctor(String username) {
+		this.username = username;
+		File file = new File("src/DoctorRecords/" + username + ".txt");
+		try {
+			Scanner scan = new Scanner(file);
+			name = scan.nextLine();
+			scan.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Doctor() {
@@ -92,8 +103,8 @@ public class Doctor extends User {
 
 	public void create() {
 		try {
-			Writer wr = new FileWriter("src/doctorRecords/"+userName + ".txt");
-			wr.write(firstName.trim() + "\n" + userName.trim() + "\n" + password.trim() + "\n" + position.trim());
+			Writer wr = new FileWriter("src/doctorRecords/"+username + ".txt");
+			wr.write(firstName.trim() + "\n" + username.trim() + "\n" + password.trim() + "\n" + position.trim());
 			wr.flush();wr.close();
 		} catch (IOException e) {
 			
