@@ -177,7 +177,7 @@ public class AppointmentForm2 {
 					Date selectedDate=dateChooser.getDate();
 					Format formatter = new SimpleDateFormat("MM-dd-yyyy");
 					String date = formatter.format(selectedDate);
-				    String newRecord=date+"%"+app.get(timeIndex);
+				    String newRecord=date+"%"+app.get(timeIndex)+"% With "+PatientUser;
 					String newAppointment="Dr. "+docName+"%"+date+"%"+app.get(timeIndex);
 					System.out.println(newAppointment);
 					//add to Doctor's records

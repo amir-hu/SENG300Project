@@ -13,7 +13,6 @@ import java.util.Scanner;
 public class Doctor extends User {
 	private String firstName;
 	private String lastName;
-	private String userName;
 	private String email;
 	private String password;
 	private String position;
@@ -21,12 +20,25 @@ public class Doctor extends User {
 	public static String name = "test";
 	private static String username = "";
 	public ArrayList<String> schedule = new ArrayList<String>(); 
+	public ArrayList<String> scheduleWithDetails= new ArrayList<String>(); 
 	
 	public Doctor(String fname, String username,String password,String position) {
 		firstName = fname;
-		this.userName = username;
+		this.username = username;
 		this.password = password;
 		this.position = position;
+	}
+	
+	public Doctor(String username) {
+		this.username = username;
+		File file = new File("src/DoctorRecords/" + username + ".txt");
+		try {
+			Scanner scan = new Scanner(file);
+			name = scan.nextLine();
+			scan.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Doctor() {
@@ -46,14 +58,21 @@ public class Doctor extends User {
 		try {
 			Scanner scan = new Scanner(file);
 			scan.nextLine();scan.nextLine();scan.nextLine();scan.nextLine();
+			int i = 0;
 			while(scan.hasNextLine()) {
-				schedule.add(scan.nextLine());
+				String time = scan.nextLine(); 
+				schedule.add(time.split("% With ")[0]);
+				scheduleWithDetails.add(time);
 			}
 			scan.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return schedule;
+	}
+	
+	public List<String> showSchedule() {
 		return schedule;
 	}
 	
@@ -68,8 +87,8 @@ public class Doctor extends User {
 			scan.close();
 			Writer wr = new FileWriter("src/doctorRecords/"+username + ".txt");
 			wr.write(allfile);
-			for(int i = 0;i < schedule.size();i++) {
-				wr.write("\n" + schedule.get(i));
+			for(int i = 0;i < scheduleWithDetails.size();i++) {
+				wr.write("\n" + scheduleWithDetails.get(i));
 			}
 			wr.flush();wr.close();
 			System.out.println("WROTE TO FILE");
@@ -84,8 +103,8 @@ public class Doctor extends User {
 
 	public void create() {
 		try {
-			Writer wr = new FileWriter("src/doctorRecords/"+userName + ".txt");
-			wr.write(firstName.trim() + "\n" + userName.trim() + "\n" + password.trim() + "\n" + position.trim());
+			Writer wr = new FileWriter("src/doctorRecords/"+username + ".txt");
+			wr.write(firstName.trim() + "\n" + username.trim() + "\n" + password.trim() + "\n" + position.trim());
 			wr.flush();wr.close();
 		} catch (IOException e) {
 			

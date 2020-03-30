@@ -32,7 +32,7 @@ public class Mail   {
                            return new PasswordAuthentication(from, "SuperLegit_987");
                         }});
       
-         //compose the message  
+         //compose the message  to send
            
              MimeMessage message = new MimeMessage(session);  
              message.setFrom(new InternetAddress(from));  

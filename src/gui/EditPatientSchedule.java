@@ -25,7 +25,7 @@ import logic.Doctor;
 import logic.Patient;
 import logic.User;
 
-public class EditSchedule {
+public class EditPatientSchedule {
 	
 	private JFrame frame;
 	private JPasswordField pwdPassword;
@@ -42,7 +42,7 @@ public class EditSchedule {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditSchedule window = new EditSchedule();
+					EditPatientSchedule window = new EditPatientSchedule();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,7 +54,7 @@ public class EditSchedule {
 	/**
 	 * Create the application.
 	 */
-	public EditSchedule() {
+	public EditPatientSchedule() {
 		initialize();
 	}
 
@@ -72,7 +72,7 @@ public class EditSchedule {
 		frame.getContentPane().setBackground(new Color(0, 0, 153));
 		
 		
-		File folder = new File("src/doctorRecords/");
+		File folder = new File("src/patientRecords/");
 		ArrayList <String> namestxt = new ArrayList <String>();
 		namestxt.addAll(Arrays.asList(folder.list()));
 		ArrayList <String> names = new ArrayList <String>();
@@ -82,8 +82,7 @@ public class EditSchedule {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = list.getSelectedIndex();
-				Doctor doc = new Doctor(names.get(index));
-				DoctorHome.run();
+				PatientHome.open(names.get(index));
 			}
 		});
 		
