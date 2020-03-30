@@ -136,6 +136,9 @@ public class LogIn {
 					if(index==1) {
 						frame.setVisible(false);
 						PatientHome.open(username);
+					}if(index==3) {
+						frame.setVisible(false);
+						NurseHome.open();
 					}if(index==0) {
 						frame.setVisible(false);
 						DoctorHome.run();
