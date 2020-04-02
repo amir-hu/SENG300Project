@@ -208,11 +208,11 @@ public class PatientHome {
 					}
 					
 					String docFilename= "src/doctorRecords/"+docUsername+".txt";
-					String delAppointment=appointmentList.get(delIndex)[1]+"%"+appointmentList.get(delIndex)[2].trim();
+					String delAppointment=appointmentList.get(delIndex)[1]+"%"+appointmentList.get(delIndex)[2].trim() +"% With "+getUserName();
 					if (delIndex>=0 && delIndex<appointmentList.size()) {
 						try {
 							String contents= fileToString(docFilename);
-							Mail.Send("Your appointment on " + delAppointment + " has now been deleated",
+							Mail.Send(docUsername + "Your appointment on " + delAppointment + " with " + getUserName() +" has been deleted",
 									"legitmedicalcentre@gmail.com");
 							System.out.println("now deleting");
 							contents = contents.replaceAll(delAppointment+"\n", "");

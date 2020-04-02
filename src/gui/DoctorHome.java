@@ -131,9 +131,9 @@ public class DoctorHome {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = list.getSelectedIndex();
-				if(doc.scheduleWithDetails.get(index).split("With").length > 0) {
-					doc.notifyPatient(doc.scheduleWithDetails.get(index).split("With")[1]);
-				}
+				if(doc.scheduleWithDetails.get(index).split("With").length > 1) {
+					JOptionPane.showMessageDialog(frame, "Please edit patient appointment through the option on the side");
+				}else {
 				doc.scheduleWithDetails.remove(index);
 				doc.schedule.remove(index);
 				doc.updateSchedule();
@@ -141,9 +141,30 @@ public class DoctorHome {
 				list.setListData(doc.scheduleWithDetails.toArray());
 				list.updateUI();
 				list.ensureIndexIsVisible(doc.scheduleWithDetails.size());			
+				}
 			}
 		});
-		btnNewButton.setBounds(557, 366, 154, 25);
+		btnNewButton.setBounds(557, 260, 154, 25);
 		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Patient records");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PatientRecordScreen.run();
+				
+			}
+		});
+		btnNewButton_1.setBounds(556, 298, 155, 25);
+		frame.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Edit patient Appointments");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditPatientSchedule eps = new EditPatientSchedule();
+				eps.open();
+			}
+		});
+		btnNewButton_2.setBounds(557, 336, 154, 25);
+		frame.getContentPane().add(btnNewButton_2);
 	}
 }

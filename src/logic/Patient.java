@@ -41,4 +41,28 @@ public class Patient extends User {
 			e.printStackTrace();
 		}
 	}
+	public String getRecords(String username) {
+		File file = new File("src/patientRecords/Records/"+username + "Records.txt");
+		String records = "";
+		try {
+			Scanner scan = new Scanner(file);
+			while(scan.hasNextLine()) {
+				records = records + scan.nextLine() + "\n";
+			}
+		} catch (FileNotFoundException e) {
+			
+		}
+		return records;
+	}
+	
+	public void setRecord(String username,String record) {
+		try {
+			Writer wr = new FileWriter("src/patientRecords/Records/"+username + "Records.txt");
+			wr.write(record);
+			wr.flush();wr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
