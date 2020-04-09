@@ -49,12 +49,12 @@ public class AdminHome {
 	private void initialize() {
 		Admin admin = new Admin();
 		frame = new JFrame();
-		frame.setBounds(100, 100, 622, 356);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		System.out.println(Admin.name);
 		JLabel lblWelcomeAd = new JLabel("Welcome " + Admin.name);
-		lblWelcomeAd.setBounds(121, 13, 154, 16);
+		lblWelcomeAd.setBounds(194, 41, 154, 16);
 		frame.getContentPane().add(lblWelcomeAd);
 		
 		JButton btnNewDoctor = new JButton("New Doctor");
@@ -64,9 +64,9 @@ public class AdminHome {
 				start.open();
 			}
 		});
-		btnNewDoctor.setBounds(121, 72, 183, 25);
+		btnNewDoctor.setBounds(194, 98, 183, 25);
 		frame.getContentPane().add(btnNewDoctor);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnEditDoctorSchedule = new JButton("Edit Doctor Schedule");
@@ -76,9 +76,9 @@ public class AdminHome {
 				start.open();
 			}
 		});
-		btnEditDoctorSchedule.setBounds(121, 125, 183, 25);
+		btnEditDoctorSchedule.setBounds(194, 165, 183, 25);
 		frame.getContentPane().add(btnEditDoctorSchedule);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnEditPatientSchedule = new JButton("Edit Patient Schedule");
@@ -88,9 +88,9 @@ public class AdminHome {
 				start.open();
 			}
 		});
-		btnEditPatientSchedule.setBounds(121, 178, 183, 25);
+		btnEditPatientSchedule.setBounds(194, 233, 183, 25);
 		frame.getContentPane().add(btnEditPatientSchedule);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
