@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import logic.Admin;
 
@@ -90,6 +91,19 @@ public class AdminHome {
 		});
 		btnEditPatientSchedule.setBounds(194, 233, 183, 25);
 		frame.getContentPane().add(btnEditPatientSchedule);
+		
+		JButton logoutBtn = new JButton("Logout");
+		logoutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int input = JOptionPane.showConfirmDialog(null, "Are you sure?", "Logging Out", JOptionPane.YES_NO_OPTION);
+				if (input==0) {
+					frame.setVisible(false);
+					LogIn.main(null);
+				}
+			}
+		});
+		logoutBtn.setBounds(446, 11, 128, 23);
+		frame.getContentPane().add(logoutBtn);
 		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

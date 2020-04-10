@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -68,6 +69,11 @@ public class NurseHome {
 
 		File folder = new File("src/doctorRecords/");
 		File[] listOfFiles = folder.listFiles();
+		
+		JLabel lblNewLabel = new JLabel("Hello Nurse");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(274, 6, 153, 26);
+		frame.getContentPane().add(lblNewLabel);
 		
 		//System.out.println(docName);
 		for (File file : listOfFiles) {
@@ -146,5 +152,22 @@ public class NurseHome {
 		});
 		retrieve_btn_NH.setBounds(53, 401, 252, 36);
 		frame.getContentPane().add(retrieve_btn_NH);
+		
+		JButton logoutBtn = new JButton("Logout");
+		logoutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int input = JOptionPane.showConfirmDialog(null, "Are you sure?", "Logging Out", JOptionPane.YES_NO_OPTION);
+				if (input==0) {
+					frame.setVisible(false);
+					LogIn.main(null);
+				}
+			}
+		});
+		logoutBtn.setBounds(720, 0, 168, 26);
+		frame.getContentPane().add(logoutBtn);
+		
+		
+		
+	
 	}
 }

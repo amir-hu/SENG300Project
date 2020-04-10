@@ -167,15 +167,17 @@ public class LogIn {
 				if(attempt.equals("true")) {
 					//no issues move on to the next screen
 					if(index==1) {
-						frame.setVisible(false);
 						PatientHome.open(username);
-					}if(index==3) {
 						frame.setVisible(false);
+					}if(index==3) {
 						NurseHome.open();
+						frame.setVisible(false);
 					}if(index==0) {
 						DoctorHome.run();
+						frame.setVisible(false);
 					}if(index==2) {
 						AdminHome.run();
+						frame.setVisible(false);
 					}
 				}else if(attempt.equals("false")) {
 					JOptionPane.showMessageDialog(frame, "Log in information incorrect try again","ERROR", JOptionPane.ERROR_MESSAGE);

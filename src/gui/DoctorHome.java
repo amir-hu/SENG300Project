@@ -60,6 +60,19 @@ public class DoctorHome {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		System.out.println(Doctor.name);
+		
+		JButton logoutBtn = new JButton("Logout");
+		logoutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int input = JOptionPane.showConfirmDialog(null, "Are you sure?", "Logging Out", JOptionPane.YES_NO_OPTION);
+				if (input==0) {
+					frame.setVisible(false);
+					LogIn.main(null);
+				}
+			}
+		});
+		logoutBtn.setBounds(733, 0, 155, 23);
+		frame.getContentPane().add(logoutBtn);
 		JLabel lblWelcomeDr = new JLabel("Welcome Dr. " + Doctor.name);
 		lblWelcomeDr.setBounds(384, 13, 154, 16);
 		frame.getContentPane().add(lblWelcomeDr);
@@ -91,11 +104,11 @@ public class DoctorHome {
 			start++;
 		}
 		JComboBox comboBox = new JComboBox(free);
-		comboBox.setBounds(557, 69, 154, 22);
+		comboBox.setBounds(557, 69, 254, 22);
 		frame.getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox(timeFree);
-		comboBox_1.setBounds(557, 142, 154, 22);
+		comboBox_1.setBounds(557, 142, 254, 22);
 		frame.getContentPane().add(comboBox_1);
 		JButton btnAddToSchedule = new JButton("Add To Schedule");
 		btnAddToSchedule.addActionListener(new ActionListener() {
@@ -123,7 +136,7 @@ public class DoctorHome {
 
 			}
 		});
-		btnAddToSchedule.setBounds(557, 222, 154, 25);
+		btnAddToSchedule.setBounds(557, 191, 255, 35);
 		
 		frame.getContentPane().add(btnAddToSchedule);
 		
@@ -144,7 +157,7 @@ public class DoctorHome {
 				}
 			}
 		});
-		btnNewButton.setBounds(557, 260, 154, 25);
+		btnNewButton.setBounds(557, 245, 255, 35);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Patient records");
@@ -154,7 +167,7 @@ public class DoctorHome {
 				
 			}
 		});
-		btnNewButton_1.setBounds(556, 298, 155, 25);
+		btnNewButton_1.setBounds(556, 298, 255, 35);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Edit patient Appointments");
@@ -164,7 +177,7 @@ public class DoctorHome {
 				eps.open();
 			}
 		});
-		btnNewButton_2.setBounds(557, 336, 154, 25);
+		btnNewButton_2.setBounds(557, 355, 255, 35);
 		frame.getContentPane().add(btnNewButton_2);
 	}
 }

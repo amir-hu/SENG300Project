@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import logic.Mail;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -84,10 +85,23 @@ public class PatientHome {
 		    	System.out.println("An error occurred.");
 		    	e.printStackTrace();
 		    }
+		
+		JButton logoutBtn = new JButton("Logout");
+		logoutBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int input = JOptionPane.showConfirmDialog(null, "Are you sure?", "Logging Out", JOptionPane.YES_NO_OPTION);
+				if (input==0) {
+					frame.setVisible(false);
+					LogIn.main(null);
+				}
+			}
+		});
+		logoutBtn.setBounds(761, 3, 127, 23);
+		frame.getContentPane().add(logoutBtn);
 		JLabel UserName = new JLabel("Hello "+name);
 		UserName.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		UserName.setHorizontalAlignment(SwingConstants.CENTER);
-		UserName.setBounds(10, 0, 878, 25);
+		UserName.setBounds(20, 0, 878, 25);
 		frame.getContentPane().add(UserName);
 		
 		DefaultListModel app=new DefaultListModel();
@@ -323,5 +337,4 @@ public class PatientHome {
 	public ArrayList<String[]> getAppointmentList() {
 		return this.appointmentList;
 	}
-	
 }
