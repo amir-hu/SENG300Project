@@ -15,7 +15,7 @@ public class Patient extends User {
 	private String email;
 	private String password;
 	
-	
+	//Patient account info
 	public Patient(String fname,String lName, String username,String email,String password) {
 		firstName = fname;
 		lastName = lName;
@@ -27,10 +27,13 @@ public class Patient extends User {
 	public Patient() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	//Checks if sign in matches account in patientRecords
 	public String Authenticate(String username,String password) {
 		return super.Authenticate("src/patientRecords/" + username + ".txt", password);
 	}
 
+	//Creates new patient account in patientRecords folder
 	public void create() {
 		try {
 			Writer wr = new FileWriter("src/patientRecords/"+username + ".txt");
@@ -41,6 +44,8 @@ public class Patient extends User {
 			e.printStackTrace();
 		}
 	}
+	
+	//Retrieves account info
 	public String getRecords(String username) {
 		File file = new File("src/patientRecords/Records/"+username + "Records.txt");
 		String records = "";

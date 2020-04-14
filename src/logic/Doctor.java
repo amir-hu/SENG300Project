@@ -45,7 +45,7 @@ public class Doctor extends User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	//Authentication function which looks for the inputted username in the doctor records to check if account exists
 	public String Authenticate(String username,String password) {
 		String response =super.Authenticate("src/doctorRecords/" + username + ".txt", password);
 		Doctor.name = super.name;
@@ -53,6 +53,7 @@ public class Doctor extends User {
 		return response;
 	}
 	
+	//Initializes the doctor's schedule for the first time by scanning the doctor's
 	public List<String> getSchedule() {
 		File file = new File("src/doctorRecords/" + username + ".txt");
 		try {
@@ -72,11 +73,12 @@ public class Doctor extends User {
 		return schedule;
 	}
 	
+	//Returns doctor's current schedule
 	public List<String> showSchedule() {
 		return schedule;
 	}
 	
-	
+	//Takes in user's input from GUI and adds or deletes an entry on the doctor's schedule file
 	public void updateSchedule() {
 		
 		try {
@@ -100,7 +102,7 @@ public class Doctor extends User {
 		
 	}
 	
-
+	//Creates a new doctor file in doctor Records
 	public void create() {
 		try {
 			Writer wr = new FileWriter("src/doctorRecords/"+username + ".txt");
