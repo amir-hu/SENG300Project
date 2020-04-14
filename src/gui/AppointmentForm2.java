@@ -64,7 +64,7 @@ public class AppointmentForm2 {
 	 */
 	private void initialize(String username, String PatientUser, int transition) {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 469, 319);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -177,14 +177,14 @@ public class AppointmentForm2 {
 					Date selectedDate=dateChooser.getDate();
 					Format formatter = new SimpleDateFormat("MM-dd-yyyy");
 					String date = formatter.format(selectedDate);
-				    String newRecord=date+"%"+app.get(timeIndex)+"% With "+PatientUser;
+				    String newRecord=date+"%"+app.get(timeIndex)+"% With "+PatientUser + "\n";
 					String newAppointment="Dr. "+docName+"%"+date+"%"+app.get(timeIndex);
 					System.out.println(newAppointment);
 					//add to Doctor's records
 					BufferedWriter docWriter;
 					try {
 						docWriter = new BufferedWriter(new FileWriter("src/doctorRecords/"+username+".txt/",true));
-						docWriter.write(newRecord+"\n");
+						docWriter.write(newRecord);
 						docWriter.close();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block

@@ -37,7 +37,7 @@ public class Patient extends User {
 	public void create() {
 		try {
 			Writer wr = new FileWriter("src/patientRecords/"+username + ".txt");
-			wr.write(firstName + " " + lastName + "\n" + username + "\n" + password + "\n" + email);
+			wr.write(firstName + " " + lastName + "\n" + username + "\n" + password + "\n" + email + "\n");
 			wr.flush();wr.close();
 		} catch (IOException e) {
 			

@@ -106,7 +106,7 @@ public class Doctor extends User {
 	public void create() {
 		try {
 			Writer wr = new FileWriter("src/doctorRecords/"+username + ".txt");
-			wr.write(firstName.trim() + "\n" + username.trim() + "\n" + password.trim() + "\n" + position.trim());
+			wr.write(firstName.trim() + "\n" + username.trim() + "\n" + password.trim() + "\n" + position.trim() + "\n");
 			wr.flush();wr.close();
 		} catch (IOException e) {
 			
